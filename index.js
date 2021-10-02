@@ -1,5 +1,5 @@
  const express = require('express');
-
+const routes = require('./routes')
  const bodyParser = require('body-parser');
  const path = require('path');
  const PORT = process.env.PORT || 3000
@@ -28,15 +28,8 @@ router.get('/search', a03Controller.getSearchProducts);
     //.set('view engine', 'hbs')
     .use(bodyParser({ extended: false })) // For parsing the body of a POST
     
-    .get('/', (req, res, next) => {
-        // This is the primary index, always handled last.
-        res.render('home', {
-        title: 'Prove03',
-        path: '/',
-        });
-    })
 
-    .use('/a03', a03Controller)
+    .use('/', routes)
 
     
     .use((req, res, next) => {
