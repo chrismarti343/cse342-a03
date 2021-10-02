@@ -1,24 +1,40 @@
-const Product = require('../models/product');
+//const Product = require('../models/product');
+const express = require('express');
+const router = express.Router();
 
-// handle ta03/ 
-exports.getProducts = (req, res, next) => {
-    Product.fetchAll(products => {
-        res.render('pages/ta03', {
-            title: 'Team Activity 03',
-            path: '/ta03',
-            products: products
-        });
-    });
-};
+//const Product = require('../models/product');
 
-// handle ta03/search
-exports.getSearchProducts = (req, res, next) => {
-    const query = req.query.query.toLowerCase();
-    Product.search(query, filteredProducts => {
-        res.render('pages/ta03', {
-            title: 'Team Activity 03',
-            path: '/ta03',
-            products: filteredProducts
-        });
+
+const products = require('../data/products.json')
+
+router.get('/search', (req, res, next) => {
+  const tag = req.query.tag;
+  if (tag == "") {
+    res.render('a03', {
+      title: 'Team Activity 03',
+      path: '/a03',
+      products: []
+    })
+  }
+  console.log(tag);
+  let caseTag = tag[0].toUpperCase() + tag.substring(1).toLowerCase();
+  console.log(caseTag);
+  const updatedProducts = products.filter(products => products.tags.includes(caseTag));
+  res.render('a03', {
+    title: 'Assigment 03',
+    path: '/a03',
+    products: updatedProducts
+  })
+});
+
+router.get('/', (req, res, next) => {
+    res.render('a03', {
+      title: 'Assigment 03',
+      path: '/a03', // For pug, EJS
+      products: products
     });
-};
+  });
+
+module.exports = router;
+
+
