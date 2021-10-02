@@ -7,28 +7,15 @@ const routes = require('./routes')
  const app = express();
 
 
- const a03Controller = require('./controllers/a03');
 
-/* router.get('/', a03Controller.getProducts);
-router.get('/search', a03Controller.getSearchProducts);
-  */
- 
- //router.get('/', a03Controller.getProducts);
- //router.get('/search', a03Controller.getSearchProducts);
- //const a03Controller = require('../controllers/ta03.js');
  
   app
     .use(express.static(path.join(__dirname, 'public')))
     .set('views', path.join(__dirname, 'views'))
     .set('view engine', 'ejs')
-    // For view engine as Pug */
-    //.set('view engine', 'pug') // For view engine as PUG.
-    // For view engine as hbs (Handlebars)
-    //.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'})) // For handlebars
-    //.set('view engine', 'hbs')
+ 
     .use(bodyParser({ extended: false })) // For parsing the body of a POST
     
-
     .use('/', routes)
 
     
