@@ -33,7 +33,10 @@
                 <strong>Tags:</strong> <% product.tags.forEach(tag => { %>
                 <%=tag%>,
                 <% }) %>
+              
               </p>
+
+              <p><strong>Id:</strong> <%= product.id%></p>
             </div>
     
             <% } } else { %>
